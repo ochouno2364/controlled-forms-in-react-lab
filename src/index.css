@@ -35,10 +35,13 @@ body {
 }
 
 
+
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+
 
 button {
   border-radius: 8px;
@@ -109,6 +112,10 @@ input {
   color: black;
 }
 
+.bookCard title {
+  font-weight: 700;
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -119,6 +126,6 @@ input {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #a11483;
   }
 }

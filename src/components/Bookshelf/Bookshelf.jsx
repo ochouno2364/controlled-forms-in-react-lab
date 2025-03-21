@@ -1,32 +1,33 @@
 import { useState } from "react";
 
-const Bookshelf = () => {
+const Bookshelf = (props) => {
 
     const [books, setBooks] = useState([
         { title: 'Fourth Wing', author: 'Rebecca Yarros' },
         { title: 'The Lion, the Witch and the Wardrobe', author: 'C.S. Lewis' },
       ]);
 
-      const [newBook, setNewBook] = useState([{
+
+      const [newBook, setNewBook] = useState({
         title: '',
         author: '',
-      }]);
+      });
 
 
       const handleInputChange = (event) => {
-        setBooks(event.target.value);
-        console.log(event.target.value);
-        newBook({... books})
-        // setNewBook({... books, [event.target.title]: [event.target.author]});
+        console.log(event.target.value); 
+        setNewBook((newBook) => ({...newBook, [event.target.name]: event.target.value}))
       };
 
       const handleSubmit = (event) => {
         event.preventDefault();
-        setBooks({... books, ... newBook});
+        const allBooks = [...books, newBook];
+        setBooks(allBooks);
         setNewBook({
-            title: '',
-            author: '',
-        })
+          title: '',
+          author: '',
+        });
+        
 
       };
 
@@ -43,14 +44,14 @@ const Bookshelf = () => {
         <input
          id="title"
          name="title" 
-         value={books.title} 
+         value={newBook.title} 
          onChange={handleInputChange}
          />
         <label htmlFor="author">Author: </label>
         <input 
         id="author"
         name="author"
-        value={books.author}
+        value={newBook.author}
         onChange={handleInputChange}
         />
         <br></br>
@@ -59,7 +60,15 @@ const Bookshelf = () => {
     </form>
     
   </div>
-  <div className="bookCardsDiv"></div>
+  <ul className="bookCardsDiv">
+    {books.map((props, index) => {
+      return <li className="bookCard"
+       key={props.index}> {props.title} 
+       <br></br>
+       <br></br>
+       by {props.author}</li>
+    })}
+  </ul>
 </div>
 
     </>
